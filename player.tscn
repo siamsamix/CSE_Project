@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://c7gyyn4jfqapl"]
+
+[ext_resource type="Script" uid="uid://c673yf3synl6h" path="res://player.gd" id="1_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://cn58mlfjldnbi" path="res://kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_walk1.png" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://bnkbs7c3f8cxp" path="res://kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_walk2.png" id="2_i3pqv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_onrkg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i3pqv")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(50, 98)
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_i3pqv"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1166310693]
+script = ExtResource("1_i3pqv")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1564064126]
+sprite_frames = SubResource("SpriteFrames_hqtel")
+animation = &"walk"
+frame = 1
+frame_progress = 0.4324828
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1438608482]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1624104803]
+scale = Vector2(0.9508908, 0.94472903)
+
+[node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=587207422]
+modification_stack = SubResource("SkeletonModificationStack2D_i3pqv")

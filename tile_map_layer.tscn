@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bxvqhrd54318n"]
+
+[ext_resource type="Texture2D" uid="uid://byfidyyrnb6tw" path="res://new_terrain.tres" id="1_0ugm7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ugm7"]
+texture = ExtResource("1_0ugm7")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_vqaso"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_0ugm7")
+
+[node name="TileMapLayer" type="TileMapLayer" unique_id=1731250456]
+tile_set = SubResource("TileSet_vqaso")
