@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://cn58mlfjldnbi" path="res://kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_walk1.png" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bnkbs7c3f8cxp" path="res://kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_walk2.png" id="2_i3pqv"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(50, 98)
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_i3pqv"]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
 animations = [{
 "frames": [{
@@ -18,20 +23,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(50, 98)
-
-[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_i3pqv"]
-
 [node name="Player" type="CharacterBody2D" unique_id=1166310693]
 script = ExtResource("1_i3pqv")
-metadata/_edit_group_ = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1564064126]
-sprite_frames = SubResource("SpriteFrames_hqtel")
-animation = &"walk"
-frame = 1
-frame_progress = 0.4324828
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1438608482]
@@ -43,3 +36,15 @@ scale = Vector2(0.9508908, 0.94472903)
 
 [node name="Skeleton2D" type="Skeleton2D" parent="." unique_id=587207422]
 modification_stack = SubResource("SkeletonModificationStack2D_i3pqv")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=1667290447]
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1564064126]
+sprite_frames = SubResource("SpriteFrames_hqtel")
+animation = &"walk"
+frame = 1
+frame_progress = 0.4324828
+metadata/_edit_group_ = true
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
