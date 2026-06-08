@@ -1,5 +1,7 @@
 extends Node
 
+#@onready var scene_transition
+
 var timer1_started = false
 
 # Called when the node enters the scene tree for the first time.
@@ -44,3 +46,14 @@ func _on_area_2d_2_body_exited(body: Node2D) -> void:
 
 func _on_audio_stream_player_2d_finished() -> void:
 	get_tree().paused = false
+
+
+func _on_area_2d_3_body_entered(body: Node2D) -> void:
+	$transition/AnimationPlayer.play("fade_in")
+	$Timer2.start()
+	get_tree().paused = true
+
+
+func _on_timer_2_timeout() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://reached.tscn")

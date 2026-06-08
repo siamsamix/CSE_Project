@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c6jkx260u83uv"]
+
+[ext_resource type="Texture2D" uid="uid://dwrfow8p8mkfq" path="res://background.png" id="1_xe6xu"]
+[ext_resource type="Script" uid="uid://btucfrdiemu1s" path="res://reached.gd" id="2_t8sc3"]
+[ext_resource type="Texture2D" uid="uid://ikjr1suqijku" path="res://kenney_platformer-characters/PNG/Adventurer/Poses/adventurer_stand.png" id="2_xe6xu"]
+[ext_resource type="PackedScene" uid="uid://3pvi2052d43e" path="res://transition.tscn" id="4_f0l07"]
+
+[node name="Background" type="Sprite2D" unique_id=315230947]
+position = Vector2(553.49994, 237.39862)
+scale = Vector2(1.0265411, 1.0385994)
+texture = ExtResource("1_xe6xu")
+script = ExtResource("2_t8sc3")
+
+[node name="AdventurerStand" type="Sprite2D" parent="." unique_id=170040826]
+position = Vector2(141.63321, 188.8276)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_xe6xu")
+flip_h = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1783673735]
+wait_time = 2.0
+
+[node name="transition" parent="." unique_id=333943255 instance=ExtResource("4_f0l07")]
+position = Vector2(-580.10333, -264.20062)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

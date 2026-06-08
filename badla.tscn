@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d3iysieftdcp6"]
+
+[ext_resource type="Texture2D" uid="uid://mewulwk1hor8" path="res://badla.png" id="1_hhey1"]
+[ext_resource type="Script" uid="uid://bh4o1umpsipl6" path="res://badla.gd" id="2_pwn6m"]
+[ext_resource type="PackedScene" uid="uid://3pvi2052d43e" path="res://transition.tscn" id="3_mlv3x"]
+
+[node name="Badla" type="Sprite2D" unique_id=1163986785]
+position = Vector2(605.50006, 350.5)
+scale = Vector2(0.86292624, 0.92057294)
+texture = ExtResource("1_hhey1")
+script = ExtResource("2_pwn6m")
+
+[node name="transition" parent="." unique_id=333943255 instance=ExtResource("3_mlv3x")]
+position = Vector2(-750.3539, -419.84723)

@@ -10,6 +10,8 @@
 [ext_resource type="Shader" uid="uid://bfgqshhrvcgvv" path="res://level_1.gdshader" id="7_j7kpp"]
 [ext_resource type="Script" uid="uid://dasn8d5q2o4f6" path="res://color_rect.gd" id="8_bjebc"]
 [ext_resource type="AudioStream" uid="uid://cew8nxu1lsqlj" path="res://anik_change.mp3" id="9_5rr72"]
+[ext_resource type="Texture2D" uid="uid://dhqonieyvr3qf" path="res://bus.svg" id="11_1pe0h"]
+[ext_resource type="PackedScene" uid="uid://3pvi2052d43e" path="res://transition.tscn" id="12_27bay"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h2yge"]
 
@@ -45,6 +47,9 @@ shader_parameter/progress = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gyffv"]
 size = Vector2(15.5, 63)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27bay"]
+size = Vector2(72, 117)
+
 [node name="level 1" type="Node" unique_id=2073969693]
 process_mode = 3
 script = ExtResource("1_5hph3")
@@ -68,6 +73,10 @@ position = Vector2(918.875, 184.62503)
 scale = Vector2(1.1157553, 1.2988427)
 texture = ExtResource("1_ihfcg")
 
+[node name="GeminiSvg" type="Sprite2D" parent="." unique_id=1923460541]
+position = Vector2(1879, 397)
+texture = ExtResource("11_1pe0h")
+
 [node name="Player" parent="." unique_id=1166310693 instance=ExtResource("1_hn12h")]
 process_mode = 1
 position = Vector2(61, 373)
@@ -89,7 +98,6 @@ shape = SubResource("RectangleShape2D_j7kpp")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=682282557]
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_bjebc")
 offset_left = 1038.0
 offset_top = 206.0
@@ -121,8 +129,23 @@ process_mode = 3
 stream = ExtResource("9_5rr72")
 playback_type = 1
 
+[node name="Area2D3" type="Area2D" parent="." unique_id=501621836]
+position = Vector2(767, 120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3" unique_id=1023685336]
+position = Vector2(1235, 305.5)
+shape = SubResource("RectangleShape2D_27bay")
+
+[node name="transition" parent="." unique_id=333943255 instance=ExtResource("12_27bay")]
+
+[node name="Timer2" type="Timer" parent="." unique_id=1249497549]
+process_mode = 3
+wait_time = 0.5
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="." method="_on_area_2d_2_body_exited"]
 [connection signal="finished" from="Area2D2/AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
+[connection signal="body_entered" from="Area2D3" to="." method="_on_area_2d_3_body_entered"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
