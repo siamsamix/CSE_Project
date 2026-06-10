@@ -1,8 +1,16 @@
 extends CharacterBody2D
 
 var ghost_wrapped_time: float = 0.0
-const SPEED = 500.0
-const JUMP_VELOCITY = -300.0
+@export var SPEED = 250.0
+@export var JUMP_VELOCITY = -350.0
+
+@export var DASH_SPEED = 450.0
+var is_dashing: bool = false
+var dash_direction = 1
+var cooled_down = true
+@export var on_moving_platform = false
+
+@onready var dash_timer = $DashTimer
 
 func _ready() -> void:
 	velocity.x = SPEED
@@ -14,13 +22,24 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if Input.is_action_just_pressed("ui_accept") and (is_on_floor() or (velocity.x == 0 and not is_on_floor())):
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("dash") and not is_dashing and cooled_down:
+		start_dash(1)
 	
-	velocity.x = SPEED
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+			
+			
+	if not on_moving_platform:
+		velocity.x = SPEED
+	
+	if on_moving_platform:
+		velocity.x = 0
+	
+	if is_dashing:
+		velocity.x = DASH_SPEED
 	
 	ghost_wrapped_time += delta
-	if ghost_wrapped_time >= 0.1:
+	if ghost_wrapped_time >= 0.1 and is_dashing:
 		spawn_ghost()
 		ghost_wrapped_time = 0.0
 	move_and_slide()
@@ -50,4 +69,26 @@ func spawn_ghost():
 	# Add it to the world (parent), so it stays put while the player moves away
 	get_parent().add_child(ghost)
 
-#func _on_dash_timer_timeout() -> void:
+func start_dash(dir: float):
+	is_dashing = true
+	
+	# Determine dash direction. Default to the way the player is facing 
+	# if they aren't holding left or right.
+	if dir != 0:
+		dash_direction = Vector2(dir, 0).normalized()
+	else:
+		# Fallback: Check which way your sprite is facing if standing still
+		dash_direction = Vector2(-1 if $Sprite2D.flip_h else 1, 0)
+	
+	dash_timer.start()
+	
+func _on_dash_timer_timeout() -> void:
+	is_dashing = false
+	cooled_down = false
+	$DashTimer/cooldown_timer.start()
+	if not on_moving_platform:
+		velocity.x = SPEED
+
+
+func _on_cooldown_timer_timeout() -> void:
+	cooled_down = true

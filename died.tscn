@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d4s2o28l6jb2"]
+
+[ext_resource type="Script" uid="uid://tn5w8khd23p1" path="res://died.gd" id="1_2fs67"]
+
+[node name="Node" type="Node" unique_id=1708781713]
+script = ExtResource("1_2fs67")
+
+[node name="Button" type="Button" parent="." unique_id=1325343370]
+offset_left = 448.0
+offset_top = 192.0
+offset_right = 704.0
+offset_bottom = 256.0
+text = "Try again"
+
+[node name="Label" type="Label" parent="." unique_id=2122998300]
+offset_left = 448.0
+offset_top = 88.0
+offset_right = 704.0
+offset_bottom = 111.0
+text = "You died!"
+horizontal_alignment = 1
+
+[node name="Button2" type="Button" parent="." unique_id=1038308211]
+offset_left = 448.0
+offset_top = 320.0
+offset_right = 704.0
+offset_bottom = 384.0
+text = "Quit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

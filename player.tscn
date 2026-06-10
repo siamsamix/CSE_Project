@@ -40,6 +40,10 @@ modification_stack = SubResource("SkeletonModificationStack2D_i3pqv")
 [node name="DashTimer" type="Timer" parent="." unique_id=1667290447]
 one_shot = true
 
+[node name="cooldown_timer" type="Timer" parent="DashTimer" unique_id=1365061483]
+wait_time = 3.0
+one_shot = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1564064126]
 sprite_frames = SubResource("SpriteFrames_hqtel")
 animation = &"walk"
@@ -48,3 +52,4 @@ frame_progress = 0.4324828
 metadata/_edit_group_ = true
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashTimer/cooldown_timer" to="." method="_on_cooldown_timer_timeout"]

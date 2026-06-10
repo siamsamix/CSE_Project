@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://r6leb0o1yuyq"]
+
+[ext_resource type="Script" uid="uid://chccpuhiupgx5" path="res://settings.gd" id="1_x2hje"]
+
+[node name="settings" type="Node" unique_id=775446013]
+script = ExtResource("1_x2hje")
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=807539533]
+offset_left = 481.0
+offset_top = 217.0
+offset_right = 737.0
+offset_bottom = 248.0
+text = "250"
+
+[node name="Label" type="Label" parent="." unique_id=640741275]
+offset_left = 344.0
+offset_top = 221.0
+offset_right = 466.0
+offset_bottom = 244.0
+text = "Normal velocity"
+
+[node name="Label2" type="Label" parent="." unique_id=1952231572]
+offset_left = 344.0
+offset_top = 301.0
+offset_right = 456.0
+offset_bottom = 324.0
+text = "Dash velocity"
+
+[node name="LineEdit2" type="LineEdit" parent="." unique_id=187690221]
+offset_left = 481.0
+offset_top = 301.0
+offset_right = 737.0
+offset_bottom = 332.0
+text = "450"
+
+[node name="Button" type="Button" parent="." unique_id=368229716]
+offset_left = 320.0
+offset_top = 464.0
+offset_right = 464.0
+offset_bottom = 504.0
+text = "Reset"
+
+[node name="Button2" type="Button" parent="." unique_id=465963923]
+offset_left = 752.0
+offset_top = 464.0
+offset_right = 896.0
+offset_bottom = 504.0
+text = "Apply"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1645642838]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

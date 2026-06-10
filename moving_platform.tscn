@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dgonvp6o0si1"]
+
+[ext_resource type="Script" uid="uid://bs4fvxtkyh1j" path="res://moving_platform.gd" id="1_q06lf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1b7n"]
+size = Vector2(256, 32)
+
+[sub_resource type="Animation" id="Animation_k1b7n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q06lf"]
+resource_name = "move"
+length = 5.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1472, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hrpga"]
+_data = {
+&"RESET": SubResource("Animation_k1b7n"),
+&"move": SubResource("Animation_q06lf")
+}
+
+[node name="MovingPlatform" type="Node2D" unique_id=751703076]
+script = ExtResource("1_q06lf")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1717683504]
+
+[node name="ColorRect" type="ColorRect" parent="AnimatableBody2D" unique_id=1810345076]
+offset_left = -16.0
+offset_top = 1.0
+offset_right = 239.0
+offset_bottom = 31.0
+color = Color(0.34781694, 0.34781697, 0.3478169, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=309270677]
+position = Vector2(112, 16)
+shape = SubResource("RectangleShape2D_k1b7n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D" unique_id=1158230845]
+libraries/ = SubResource("AnimationLibrary_hrpga")
+
+[connection signal="animation_finished" from="AnimatableBody2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
